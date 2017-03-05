@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!--
+    在conf.xml文件中注册UserGroupCrit.xml文件
+-->
+<configuration>
+    <!-- 允许 JDBC 支持自动生成主键，需要驱动兼容。 如果设置为 true 则这个设置强制使用自动生成主键，尽管一些驱动不能兼容但仍可正常工作（比如 Derby）。 默认值false  -->
+    <settings>
+        <setting name="useGeneratedKeys" value="true" />
+    </settings>
+
+    <!--只有定义了别名才可以使用parameterType="userGroupCrit",否则parameterType应该为“com.example.mybatis.entity.UserGroupCrit”-->
+    <typeAliases>
+        <typeAlias alias="userGroupCrit" type="com.example.mybatis.entity.UserGroupCrit"/>
+    </typeAliases>
+    <!--
+        development 开发模式
+        work 工作模式
+    -->
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC" />
+                <dataSource type="POOLED">
+                <!-- H2 in-memory mode -->
+                <!--<property name="driver" value="org.h2.Driver" />-->
+                <!--<property name="url" value="jdbc:h2:mem:test" />-->
+                <!--<property name="username" value="sa" />-->
+                <!--<property name="password" value="sa" />-->
+
+                 <!--MySQL Sample Properties -->
+                <property name="driver" value="com.mysql.jdbc.Driver" />
+                <property name="url" value="jdbc:mysql://bi-config-test:3306/rubick?useUnicode=true&amp;characterEncoding=UTF-8" />
+                <property name="username" value="admin" />
+                <property name="password" value="admin123" />
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+        <mapper resource="mappers/UserGroupCrit.xml"/>
+    </mappers>
+
+</configuration>

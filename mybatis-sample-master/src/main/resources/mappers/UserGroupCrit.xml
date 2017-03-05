@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mybatis.entity.UserGroupCrit">
+<!--
+    定义操作UserCroupCrit表的sql  映射文件UserGroupCrit.xml
+-->
+    <resultMap type="com.example.mybatis.entity.UserGroupCrit" id="userGroupCritResult">
+        <result property="id" column="id" jdbcType="BIGINT" javaType="java.lang.Long"/>
+        <result property="group_id" column="group_id" jdbcType="BIGINT" javaType="java.lang.Long"/>
+        <result property="name" column="name"/>
+        <result property="value" column="value"/>
+    </resultMap>
+
+    <select id="findUserGroupCritById" parameterType="long" resultMap="userGroupCritResult">
+        select * from rt_user_group_criteria where id=#{id}
+    </select>
+
+    <select id="findUserGroupCritByGroupId" parameterType="long" resultMap="userGroupCritResult">
+        select * from rt_user_group_criteria where group_id=#{group_id}
+    </select>
+
+    <select id="findUserGroupCritAll" resultMap="userGroupCritResult">
+        select * from rt_user_group_criteria
+    </select>
+
+
+    <insert id="insertUserGroupCrit" parameterType="userGroupCrit" useGeneratedKeys="true" keyProperty="id">
+        insert into
+        rt_user_group_criteria(
+        group_id,name,value)
+        values(#{group_id},#{name},#{value})
+    </insert>
+
+    <select id="deleteUserGroupCrit" parameterType="long" resultMap="userGroupCritResult">
+        delete from rt_user_group_criteria where id=#{id}
+    </select>
+
+    <select id="updateUserGroupCrit" parameterType="userGroupCrit" resultMap="userGroupCritResult">
+        update rt_user_group_criteria set
+        group_id=#{group_id},
+        name=#{name},
+        value=#{value}
+        where id=#{id}
+    </select>
+</mapper>
