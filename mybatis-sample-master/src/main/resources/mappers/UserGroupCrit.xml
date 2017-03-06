@@ -5,6 +5,8 @@
 <!--
     定义操作UserCroupCrit表的sql  映射文件UserGroupCrit.xml
 -->
+
+
     <resultMap type="com.example.mybatis.entity.UserGroupCrit" id="userGroupCritResult">
         <result property="id" column="id" jdbcType="BIGINT" javaType="java.lang.Long"/>
         <result property="group_id" column="group_id" jdbcType="BIGINT" javaType="java.lang.Long"/>

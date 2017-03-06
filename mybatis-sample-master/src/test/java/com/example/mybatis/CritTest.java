@@ -18,10 +18,13 @@ public class CritTest {
         InputStream inputStream = CritTest.class.getClassLoader().getResourceAsStream("mybatis/mybatis-config.xml");
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
         SqlSession sqlSession = sqlSessionFactory.openSession();
-        // statement 由映射文件namespace + 标签
+        // statement 由映射文件namespace + 标签, 可以在mybatis-config.xml中定义TypeAlias简化代码
         String statement = "com.example.mybatis.entity.UserGroupCrit.findUserGroupCritById";
-        UserGroupCrit userGroupCrit = sqlSession.selectOne(statement,90L);
-        List<UserGroupCrit> userGroupCrit1 = sqlSession.selectList("com.example.mybatis.entity.UserGroupCrit.findUserGroupCritByGroupId", 24L);
+
+        UserGroupCrit userGroupCrit = sqlSession.selectOne("findUserGroupCritById",90L);
+        UserGroupCrit userGroupCrit2 = sqlSession.selectOne(statement,90L);
+
+        List<UserGroupCrit> userGroupCrit1 = sqlSession.selectList("findUserGroupCritByGroupId", 24L);
 
         System.out.println(userGroupCrit);
         System.out.println(userGroupCrit1);
